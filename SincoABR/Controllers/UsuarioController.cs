@@ -28,22 +28,30 @@ namespace SincoABR.Controllers
         }
 
         [HttpGet]
-        [Route("ObtenerUnUsuario/{id}")]
-        public Usuario ObtenerUnUsuario(int id)
+        [Route("ObtenerUnUsuario/{username}")]
+        public Usuario ObtenerUnUsuario(string username)
         {
-            Usuario usuario = context.Usuario.FirstOrDefault(r => r.IdUsuario == id);
+            Usuario usuario = context.Usuario.FirstOrDefault(r => r.Username == username);
+            return usuario;
+        }
+
+        [HttpGet]
+        [Route("ValidateLogin/{username},{password}")]
+        public Usuario ObtenerUsuarioPorNombre(string username, string password)
+        {
+            Usuario usuario = context.Usuario.FirstOrDefault(r => r.Username == username && r.Contraseña == password);
             return usuario;
         }
 
         [HttpPost]
         [Route("CrearUsuario")]
-        public ActionResult CrearMateria([FromBody]Usuario usuario)
+        public ActionResult CrearUsuario([FromBody]Usuario usuario)
         {
             try
             {
                 context.Usuario.Add(usuario);
                 context.SaveChanges();
-                return Ok($"{usuario.IdUsuario}.");
+                return Ok($"{usuario.IdUsuario}");
             }
             catch (Exception ex)
             {

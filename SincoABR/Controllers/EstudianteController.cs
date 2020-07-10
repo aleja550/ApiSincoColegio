@@ -43,7 +43,7 @@ namespace SincoABR.Controllers
             {
                 context.Estudiante.Add(estudiante);
                 context.SaveChanges();
-                return Ok($"{estudiante.Cedula}.");
+                return Ok($"{estudiante.Cedula}");
             }
             catch (Exception ex)
             {

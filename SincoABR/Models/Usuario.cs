@@ -13,5 +13,7 @@ namespace SincoABR.Models
         public string Username { get; set; }
         public string Contraseña { get; set; }
         public int TipoUser { get; set; }
+        public byte[] Avatar { get; set; }
+        public byte? FKCodigoTemplate { get; set; }
     }
 }

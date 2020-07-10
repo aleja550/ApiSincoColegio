@@ -19,5 +19,6 @@ namespace SincoABR
         public DbSet<Materia> Materia { get; set; }
         public DbSet<Notas> Notas { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<EstiloTemplate> EstiloTemplate { get; set; }
     }
 }

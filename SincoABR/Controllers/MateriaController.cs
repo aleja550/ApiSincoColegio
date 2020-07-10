@@ -43,7 +43,7 @@ namespace SincoABR.Controllers
             {
                 context.Materia.Add(materia);
                 context.SaveChanges();
-                return Ok($"{materia.IdMateria}.");
+                return Ok($"{materia.IdMateria}");
             }
             catch (Exception ex)
             {

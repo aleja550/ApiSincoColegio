@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace SincoABR.Models
 {
@@ -13,6 +10,6 @@ namespace SincoABR.Models
         public long Cedula { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
-        public int TipoUser { get; set; }
+        public int FKUsuario { get; set; }
     }
 }

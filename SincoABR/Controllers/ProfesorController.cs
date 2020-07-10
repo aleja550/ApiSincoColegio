@@ -35,6 +35,14 @@ namespace SincoABR.Controllers
             return profesor;
         }
 
+        [HttpGet]
+        [Route("ObtenerProfesorCedula/{id}")]
+        public Profesor ObtenerProfesorCedula(long id)
+        {
+            Profesor profesor = context.Profesor.FirstOrDefault(r => r.Cedula == id);
+            return profesor;
+        }
+
         [HttpPost]
         [Route("CrearProfesor")]
         public ActionResult CrearProfesor([FromBody]Profesor profesor)
@@ -43,7 +51,7 @@ namespace SincoABR.Controllers
             {
                 context.Profesor.Add(profesor);
                 context.SaveChanges();
-                return Ok($"{profesor.Cedula}.");
+                return Ok($"{profesor.Cedula}");
             }
             catch (Exception ex)
             {

@@ -43,7 +43,7 @@ namespace SincoABR.Controllers
             {
                 context.Notas.Add(notas);
                 context.SaveChanges();
-                return Ok($"{notas.IdNotas}.");
+                return Ok($"{notas.IdNotas}");
             }
             catch (Exception ex)
             {
