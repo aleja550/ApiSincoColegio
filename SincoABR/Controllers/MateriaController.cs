@@ -35,6 +35,14 @@ namespace SincoABR.Controllers
             return materia;
         }
 
+        [HttpGet]
+        [Route("ObtenerMateriaPorNombre/{materia}")]
+        public Materia ObtenerMateriaPorNombre(string materia)
+        {
+            Materia assignature = context.Materia.FirstOrDefault(r => r.NombreMateria == materia);
+            return assignature;
+        }
+
         [HttpPost]
         [Route("CrearMateria")]
         public ActionResult CrearMateria([FromBody]Materia materia)
