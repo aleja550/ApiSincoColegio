@@ -102,5 +102,33 @@ namespace SincoABR.Controllers
                 return StatusCode(500, $"The server encountered an internal error ad was unable to complete your request. {ex.Message} {ex.StackTrace}");
             }
         }
+
+        [HttpGet]
+        [Route("ObtenerMateriaByUsername/{username}")]
+        public List<Materia> ObtenerMateriaByUsername(string username)
+        {
+            var gettinValues = context.Profesor.Join(context.Usuario, pr => pr.FKUsuario, u => u.IdUsuario,
+                            (pr, u) => new { Profesor = pr, Usuario = u }).Where(pu => pu.Usuario.Username == username);
+
+            var teacher = gettinValues.Select(x => x.Profesor);
+
+            Profesor profesor = new Profesor
+            {
+                IdProfesor = Convert.ToInt32(teacher.Select(x => x.IdProfesor).FirstOrDefault()),
+                Cedula = Convert.ToInt64(teacher.Select(x => x.Cedula).FirstOrDefault()),
+                Nombres = teacher.Select(x => x.Nombres).FirstOrDefault().ToString(),
+                Apellidos = teacher.Select(x => x.Apellidos).FirstOrDefault().ToString(),
+                FkIdMateria = Convert.ToInt32(teacher.Select(x => x.FkIdMateria).FirstOrDefault()),
+                FKUsuario = Convert.ToInt32(teacher.Select(x => x.FKUsuario).FirstOrDefault())
+            };
+
+            var assignatureQuery = context.Materia.Join(context.Profesor, m => m.IdMateria, p => p.FkIdMateria,
+                                (m, p) => new { Materia = m, Profesor = p })
+                                .Where(pm => pm.Materia.IdMateria == profesor.FkIdMateria && pm.Profesor.IdProfesor == profesor.IdProfesor);
+
+            List<Materia> materias= assignatureQuery.Select(x => x.Materia).ToList();
+
+            return materias;
+        }
     }
 }

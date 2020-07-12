@@ -63,12 +63,13 @@ namespace SincoABR.Controllers
         [Route("EditarProfesor/{id}")]
         public ActionResult EditarProfesor(int id, [FromBody]Profesor profesor)
         {
-            Profesor teacher = context.Profesor.FirstOrDefault(r => r.IdProfesor == id);
             try
             {
-                if (teacher != null)
+                if (profesor.IdProfesor == id)
                 {
-                    context.Entry(profesor).State = EntityState.Modified;
+                    context.Entry(profesor).Property(e => e.Cedula).IsModified = true;
+                    context.Entry(profesor).Property(e => e.Nombres).IsModified = true;
+                    context.Entry(profesor).Property(e => e.Apellidos).IsModified = true;
                     context.SaveChanges();
                     return Ok();
                 }
